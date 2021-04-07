@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder</title>
+    <style type="text/css">
+        #video {
+        width: 90%;
+        border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button id="start">Start capture</button>
+    <button id="stop">Stop capture</button> <br>
+    <video id="video" autoplay></video> 
+    <script type="text/javascript">
+        let video=document.getElementById("video")
+        let start=document.getElementById("start")
+        let stop=document.getElementById("stop")
+        start.addEventListener("click",async ()=>{
+            try{
+                video.srcObject=await navigator.mediaDevices.getDisplayMedia({
+                    video:true
+                })
+             }
+            catch(error){
+                console.log(error)
+                }
+            })
+        stop.addEventListener("click",()=>{
+            video.srcObject=null
+        })
+    </script>
+</body>
+</html>
